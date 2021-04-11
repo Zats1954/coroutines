@@ -1,0 +1,46 @@
+Вопросы: Cancellation
+Вопрос №1
+нет
+Поскольку job.cancelAndJoin() срабатывает через 100 мс,
+то все корутины отменяются и печать не проходит.
+
+Вопрос №2
+нет
+Поскольку child.cancel() срабатывает через 100 мс,
+раньше, чем начнется печать в child.
+
+Вопросы: Exception Handling
+Вопрос №1
+нет
+Поскольку для with корутины собраны в одно дерево и
+обработка Exception передается корневой корутине
+
+Вопрос №2
+да
+Поскольку обработка Exception проводится для
+CoroutineScope(EmptyCoroutineContext)  без дерева корутин
+
+Вопрос №3
+да
+Поскольку для supervisorScope обработка Exception проводится внутри каждой корутины
+
+Вопрос №4
+нет
+Поскольку до запуска coroutineScope обработка Exception второй корутины
+привела к остановке всего дерева.
+
+Вопрос №5
+ throw Exception("something bad happened") - да
+ e.printStackTrace()  - нет
+ Поскольку для supervisorScope обработка Exception проводится внутри каждой корутины
+ без обращения к родительской корутине
+
+Вопрос №6
+нет
+Поскольку для CoroutineScope(EmptyCoroutineContext)
+обработка Exception корневой корутины началась до запуска дочерних.
+
+Вопрос №7
+нет
+Поскольку для CoroutineScope(EmptyCoroutineContext + SupervisorJob())
+обработка Exception корневой корутины началась до запуска дочерних.
